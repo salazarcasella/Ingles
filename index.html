@@ -2,92 +2,145 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#dff5ff">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#6ec6ff">
 <title>My English Adventure - 2nd Grade</title>
-<link rel="stylesheet" href="styles.css?v=7.3">
+<link rel="stylesheet" href="styles.css?v=8.0">
 </head>
 <body>
-<main id="app">
-  <header class="top">
-    <div class="logo">🐝 <b>My English Adventure</b></div>
-    <div class="pbox">
-      <div><span id="sec">Ready!</span><span id="count">0 / 20</span></div>
-      <div class="bar"><i id="bar"></i></div>
+<div id="confetti" aria-hidden="true"></div>
+<main id="app" class="appShell">
+  <aside id="missionRail" class="missionRail" aria-label="Adventure map">
+    <div class="railBrand"><span class="bee">🐝</span><div><b>English</b><small>Adventure</small></div></div>
+    <div class="railTitle">Adventure Map</div>
+    <div id="railLevels" class="railLevels"></div>
+    <div class="mascotCard">
+      <div class="mascot">🦊</div>
+      <div><b>Foxy says:</b><p id="mascotText">You can do it! 🌟</p></div>
     </div>
-  </header>
+  </aside>
 
-  <section id="start" class="screen active">
-    <div class="card hero">
-      <div class="heroStrip">🏡 <span>👦🏻</span> <span>👧🏻</span> <span>🐶</span></div>
-      <h1>English <em>Adventure!</em></h1>
-      <h2>2nd Grade</h2>
-      <p>Listen • Look • Choose • Learn ⭐</p>
-      <input id="name" autocomplete="off" placeholder="Your name / Tu nombre">
-      <button id="go" class="green">▶ START TEST</button>
-    </div>
-  </section>
-
-  <section id="help" class="screen">
-    <div class="card">
-      <h1>🎧 How to play</h1>
-      <div class="steps">
-        <p><b>1</b> Press <strong>🔊 Listen</strong> to hear the complete question and the 3 options.</p>
-        <p><b>2</b> Look carefully at the picture.</p>
-        <p><b>3</b> Choose one answer: A, B or C.</p>
-        <p><b>4</b> Press <strong>✓ Check answer</strong>.</p>
-        <p><b>5</b> If you are wrong, try again. If you are right, continue.</p>
+  <section class="mainStage">
+    <header class="topHud">
+      <div class="mobileBrand">🐝 <b>My English Adventure</b></div>
+      <div class="hudProgress">
+        <div class="hudLine"><span id="hudSection">Ready!</span><span id="hudCount">0 / 20</span></div>
+        <div class="progressTrack"><i id="progressBar"></i></div>
       </div>
-      <div class="row">
-        <button id="testAudio" class="blue">🔊 Test audio</button>
-        <button id="ready" class="green">See topics ➜</button>
+      <div class="hudStats">
+        <span class="statPill" title="Stars earned on the first try">⭐ <b id="starCount">0</b></span>
+        <span class="statPill" title="Experience points">⚡ <b id="xpCount">0</b></span>
       </div>
-      <p id="audioMsg" class="msg" aria-live="polite"></p>
-    </div>
-  </section>
+    </header>
 
-  <section id="topics" class="screen">
-    <div class="card">
-      <h1>📚 What will we practice?</h1>
-      <div id="topicGrid" class="topicGrid"></div>
-      <div class="row"><button id="startTopics" class="green">Start Section 1 ➜</button></div>
-    </div>
-  </section>
-
-  <section id="section" class="screen">
-    <div class="card sectionCard">
-      <div id="sectionInfo"></div>
-      <button id="begin" class="green">Start section ➜</button>
-    </div>
-  </section>
-
-  <section id="quiz" class="screen">
-    <div class="card">
-      <div class="qtop"><b id="qsec"></b><b id="qnum"></b></div>
-      <h1 id="question"></h1>
-      <div class="row"><button id="listen" class="blue">🔊 Listen</button></div>
-      <div id="picture" class="picture"></div>
-      <div id="answers" class="answers"></div>
-      <div id="feedback" class="feedback" aria-live="polite"></div>
-      <div class="row actionRow">
-        <button id="check" class="green" disabled>✓ Check answer</button>
-        <button id="next" class="green hide">Next question ➜</button>
+    <section id="start" class="screen active">
+      <div class="startCard panel">
+        <div class="skyScene">
+          <div class="cloud c1">☁️</div><div class="cloud c2">☁️</div>
+          <div class="sun">☀️</div>
+          <div class="startHouse">🏡</div>
+          <div class="kids">👦🏻 👧🏻</div>
+          <div class="dog">🐶</div>
+        </div>
+        <div class="startText">
+          <span class="eyebrow">UNIT 9 • 2ND GRADE</span>
+          <h1>My English <em>Adventure!</em></h1>
+          <p>Five fun missions with pictures, listening, stars and challenges.</p>
+          <label class="nameLabel" for="name">Explorer name</label>
+          <input id="name" autocomplete="off" maxlength="24" placeholder="Write your name / Escribe tu nombre">
+          <div class="startActions">
+            <button id="go" class="btn btnPrimary">🚀 Start Adventure</button>
+            <button id="testAudioStart" class="btn btnAudio">🎧 Test female voice</button>
+          </div>
+          <p id="startAudioMsg" class="audioMsg" aria-live="polite"></p>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="result" class="screen">
-    <div class="card result">
-      <div class="trophy">🏆</div>
-      <h1>Amazing work!</h1>
-      <h2 id="who"></h2>
-      <div id="score" class="score"></div>
-      <div id="stars" class="stars"></div>
-      <p id="finalMsg"></p>
-      <button id="again" class="green">↻ Play again</button>
-    </div>
+    <section id="help" class="screen">
+      <div class="panel helpPanel">
+        <div class="panelHeader"><span class="bigIcon">🎒</span><div><span class="eyebrow">HOW TO PLAY</span><h1>Ready, explorer?</h1></div></div>
+        <div class="howGrid">
+          <div class="howCard"><span>1</span><b>Listen</b><p>Press 🔊 Listen to hear the complete question and the three options.</p></div>
+          <div class="howCard"><span>2</span><b>Look</b><p>Study the picture carefully. It gives clues, but never writes the answer.</p></div>
+          <div class="howCard"><span>3</span><b>Choose</b><p>Pick A, B or C. Then press Check answer.</p></div>
+          <div class="howCard"><span>4</span><b>Try again</b><p>If you miss one, you can try again and keep learning.</p></div>
+        </div>
+        <div class="tipBox">⭐ A correct answer on the <b>first try</b> earns a star and 10 XP. A correct retry earns 5 XP.</div>
+        <div class="center"><button id="ready" class="btn btnPrimary">🗺️ See the missions</button></div>
+      </div>
+    </section>
+
+    <section id="topics" class="screen">
+      <div class="panel mapPanel">
+        <div class="panelHeader"><span class="bigIcon">🗺️</span><div><span class="eyebrow">YOUR ADVENTURE MAP</span><h1>Five missions to complete</h1></div></div>
+        <div id="topicGrid" class="topicGrid"></div>
+        <div class="center"><button id="startTopics" class="btn btnPrimary">Start Mission 1 ➜</button></div>
+      </div>
+    </section>
+
+    <section id="section" class="screen">
+      <div class="panel sectionPanel">
+        <div id="sectionInfo"></div>
+        <div class="center"><button id="begin" class="btn btnPrimary">Start mission ➜</button></div>
+      </div>
+    </section>
+
+    <section id="quiz" class="screen">
+      <div class="quizPanel panel">
+        <div class="quizTop">
+          <div id="qsec" class="missionChip"></div>
+          <div id="qnum" class="questionChip"></div>
+        </div>
+        <h1 id="question" class="questionTitle"></h1>
+        <div class="audioRow">
+          <button id="listen" class="btn btnAudio">🔊 Listen</button>
+          <button id="slow" class="btn btnSlow">🐢 Slow</button>
+          <span id="audioStatus" class="audioStatus" aria-live="polite"></span>
+        </div>
+        <div id="picture" class="picture"></div>
+        <div id="answers" class="answers"></div>
+        <div id="feedback" class="feedback" aria-live="polite"></div>
+        <div class="quizBottom">
+          <div class="miniMascot"><span>🦊</span><b id="encourage">Look carefully. You’ve got this!</b></div>
+          <div class="actionButtons">
+            <button id="check" class="btn btnPrimary" disabled>✓ Check answer</button>
+            <button id="next" class="btn btnPrimary hide">Next ➜</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="badge" class="screen">
+      <div class="panel badgePanel">
+        <div id="badgeBurst" class="badgeBurst">🏅</div>
+        <span class="eyebrow">MISSION COMPLETE</span>
+        <h1 id="badgeTitle">Great job!</h1>
+        <p id="badgeText"></p>
+        <div id="badgeStars" class="badgeStars"></div>
+        <button id="badgeNext" class="btn btnPrimary">Next mission ➜</button>
+      </div>
+    </section>
+
+    <section id="result" class="screen">
+      <div class="panel resultPanel">
+        <div class="trophy">🏆</div>
+        <span class="eyebrow">ADVENTURE COMPLETE</span>
+        <h1 id="resultTitle">Amazing work!</h1>
+        <h2 id="who"></h2>
+        <div class="resultGrid">
+          <div class="resultStat"><span>⭐</span><b id="score"></b><small>First-try score</small></div>
+          <div class="resultStat"><span>⚡</span><b id="finalXp"></b><small>XP earned</small></div>
+          <div class="resultStat"><span>🎯</span><b id="accuracy"></b><small>Accuracy</small></div>
+        </div>
+        <div id="stars" class="finalStars"></div>
+        <p id="finalMsg"></p>
+        <div class="bestBox">🏅 Best score on this device: <b id="bestScore">0 / 20</b></div>
+        <div class="center"><button id="again" class="btn btnPrimary">↻ Play again</button></div>
+      </div>
+    </section>
   </section>
 </main>
-<script src="app.js?v=7.3"></script>
+<script src="app.js?v=8.0"></script>
 </body>
 </html>
