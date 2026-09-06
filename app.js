@@ -1,0 +1,35 @@
+(()=>{const $=s=>document.querySelector(s),screens=[...document.querySelectorAll(".screen")];
+const secs=[["My House","🏠","bedroom • kitchen • bathroom • living room"],["Prepositions","📍","in • on • under"],["Where is...?","🔎","Where's...? • Where are...?"],["Clothes & Colors","👕","his • her • shirt • shoes • pants • dress"],["Final Challenge","⭐","Mix everything you learned!"]];
+const room=(e,c)=>`<div><div class="scene">${e}</div><div class="caption">${c}</div></div>`;
+const rel=k=>`<div class="relation ${k}"><div class="relObj">${k==="inside"?"🧸":k==="under"?"🐱":"⚽"}</div><div class="relBase">${k==="inside"?"📦":k==="under"?"🪑":"🪵"}</div></div>`;
+const Q=[
+[0,"Where do you sleep?","Where do you sleep?",room("🛏️ 🧸 🪟","BEDROOM"),["kitchen","bedroom","bathroom"],1],
+[0,"Where do we cook food?","Where do we cook food?",room("🍳 🧊 🍽️","KITCHEN"),["living room","kitchen","bedroom"],1],
+[0,"Where is the bathtub?","Where is the bathtub?",room("🛁 🚿 🚽","BATHROOM"),["bathroom","kitchen","living room"],0],
+[0,"Where is the sofa?","Where is the sofa?",room("🛋️ 📺 💡","LIVING ROOM"),["bathroom","living room","kitchen"],1],
+[1,"The ball is ____ the table.","The ball is on the table.",rel("on"),["in","on","under"],1],
+[1,"The cat is ____ the chair.","The cat is under the chair.",rel("under"),["on","under","in"],1],
+[1,"The teddy bear is ____ the box.","The teddy bear is in the box.",rel("inside"),["under","in","on"],1],
+[1,"Choose: debajo de la cama","Under the bed.",room("🛏️<br>⬇️","Where is it?"),["under the bed","on the bed","in the bed"],0],
+[2,"Where's the ball?","Where's the ball?",room("🛏️ ⚽","The ball is on the bed."),["It's on the bed.","They're on the bed.","It's under the bed."],0],
+[2,"Where are the shoes?","Where are the shoes?",room("🛏️<br>👟 👟","The shoes are under the bed."),["It's under the bed.","They're under the bed.","They're in the bag."],1],
+[2,"Choose the correct question.","Choose the correct question for one computer.",room("💻","one computer"),["Where's the computer?","Where are the computer?","Where the computer?"],0],
+[2,"Choose the correct question.","Choose the correct question for pants.",room("👖","pants"),["Where's my pants?","Where are my pants?","Where is my pants?"],1],
+[3,"Choose the correct sentence.","His pants are green.",room("👦🏻 👖","GREEN PANTS"),["His pants are green.","Her pants are green.","His pants is green."],0],
+[3,"Choose the correct sentence.","Her dress is yellow.",room("👧🏻 👗","YELLOW DRESS"),["His dress is yellow.","Her dress is yellow.","Her dress are yellow."],1],
+[3,"Complete: His ____ are black.","His shoes are black.",room("👦🏻 👞 👞","BLACK SHOES"),["shirt","shoes","dress"],1],
+[3,"Complete: Her ____ is orange.","Her shirt is orange.",room("👧🏻 👚","ORANGE SHIRT"),["shirt","pants","shoes"],0],
+[4,"Where's my orange train?","Where's my orange train? In the kitchen.",room("🚂 🍳","ORANGE TRAIN"),["In the kitchen.","In the bathroom.","In the bedroom."],0],
+[4,"Where's my little doll?","Where's my little doll? In the bathroom.",room("🪆 🛁","LITTLE DOLL"),["In the living room.","In the bathroom.","In the kitchen."],1],
+[4,"The computer is ____ the desk.","The computer is on the desk.",room("💻<br>🪵","COMPUTER + DESK"),["under","in","on"],2],
+[4,"The rabbit is ____ the bag.","The rabbit is in the bag.",room("🎒🐰","RABBIT + BAG"),["on","in","under"],1]];
+let i=0,sel=null,score=0,started=-1,lock=false;
+function show(id){screens.forEach(x=>x.classList.toggle("active",x.id===id));window.scrollTo({top:0,behavior:"smooth"})}
+function speak(t){const m=$("#audioMsg");if(!("speechSynthesis"in window)){if(m)m.textContent="Audio is not available in this browser.";return}try{speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=.76;u.pitch=1.04;let vs=speechSynthesis.getVoices(),v=vs.find(x=>/^en-US/i.test(x.lang))||vs.find(x=>/^en/i.test(x.lang));if(v)u.voice=v;u.onstart=()=>{if(m)m.textContent="🔊 Playing audio..."};u.onend=()=>{if(m)m.textContent="✅ Audio works!"};u.onerror=()=>{if(m)m.textContent="Try tapping the audio button again in Chrome or Edge."};speechSynthesis.speak(u)}catch(e){if(m)m.textContent="Audio could not start on this device."}}
+if("speechSynthesis"in window){speechSynthesis.getVoices();speechSynthesis.onvoiceschanged=()=>speechSynthesis.getVoices()}
+function prog(){$("#count").textContent=`${i} / ${Q.length}`;$("#bar").style.width=`${i/Q.length*100}%`;$("#sec").textContent=i<Q.length?secs[Q[i][0]][0]:"Finished!"}
+function intro(s){let a=secs[s];$("#sectionInfo").innerHTML=`<div class="big">${a[1]}</div><h1>Section ${s+1}: ${a[0]}</h1><p>${a[2]}</p><div class="stars">⭐ ⭐ ⭐ ⭐</div>`;started=s;show("section")}
+function render(){let q=Q[i],s=q[0];if(started!==s)return intro(s);sel=null;lock=false;$("#qsec").textContent=`${secs[s][1]} ${secs[s][0]}`;$("#qnum").textContent=`Question ${i-s*4+1} of 4`;$("#question").textContent=q[1];$("#picture").innerHTML=q[3];$("#feedback").className="feedback";$("#feedback").textContent="";$("#check").disabled=true;$("#check").classList.remove("hide");$("#next").classList.add("hide");let box=$("#answers");box.innerHTML="";q[4].forEach((t,n)=>{let b=document.createElement("button");b.className="ans";b.type="button";b.innerHTML=`<span>${String.fromCharCode(65+n)}</span>${t}`;b.addEventListener("click",()=>{if(lock)return;sel=n;[...box.children].forEach((x,j)=>x.classList.toggle("sel",j===n));$("#check").disabled=false});box.appendChild(b)});prog();show("quiz")}
+function check(){if(sel===null||lock)return;let q=Q[i],bs=[...$("#answers").children],f=$("#feedback");if(sel===q[5]){lock=true;score++;bs[sel].classList.add("ok");f.className="feedback show good";f.textContent="✅ Correct! Great job! ⭐";$("#check").classList.add("hide");$("#next").classList.remove("hide");speak("Correct! Great job!")}else{bs[sel].classList.add("no");f.className="feedback show bad";f.textContent="❌ Not yet. Look carefully and try again!";speak("Not yet. Try again.");setTimeout(()=>{bs[sel]?.classList.remove("no","sel");sel=null;$("#check").disabled=true},650)}}
+function finish(){prog();show("result");let n=$("#name").value.trim()||"Student",p=Math.round(score/Q.length*100),st=p>=90?5:p>=75?4:p>=60?3:p>=40?2:1;$("#who").textContent=`${n}, you finished the adventure!`;$("#score").textContent=`${score} / 20 • ${p}%`;$("#stars").textContent="⭐".repeat(st);$("#finalMsg").textContent=p>=90?"Excellent! You are an English star! 🌟":p>=75?"Very good! Keep shining! 🎉":p>=60?"Good job! Keep practicing! 👍":"Keep practicing. You can do it! 💪";speak(`Great job ${n}. You finished the English test.`)}
+$("#go").onclick=()=>show("help");$("#testAudio").onclick=()=>speak("Hello! Welcome to your English adventure. The audio is working.");$("#ready").onclick=()=>intro(0);$("#begin").onclick=render;$("#listen").onclick=()=>speak(Q[i][2]);$("#check").onclick=check;$("#next").onclick=()=>{i++;i>=Q.length?finish():render()};$("#again").onclick=()=>{i=0;sel=null;score=0;started=-1;lock=false;$("#name").value="";prog();show("start")};prog()})();
