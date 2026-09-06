@@ -1,7 +1,8 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>My English Adventure - 2nd Grade</title>
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -9,7 +10,10 @@
 <main id="app">
   <header class="top">
     <div class="logo">🐝 <b>My English Adventure</b></div>
-    <div class="pbox"><div><span id="sec">Ready!</span><span id="count">0 / 20</span></div><div class="bar"><i id="bar"></i></div></div>
+    <div class="pbox">
+      <div><span id="sec">Ready!</span><span id="count">0 / 20</span></div>
+      <div class="bar"><i id="bar"></i></div>
+    </div>
   </header>
 
   <section id="start" class="screen active">
@@ -27,18 +31,34 @@
     <div class="card">
       <h1>🎧 How to play</h1>
       <div class="steps">
-        <p><b>1</b> Press <strong>🔊 Listen</strong>.</p>
-        <p><b>2</b> Look at the picture.</p>
+        <p><b>1</b> Press <strong>🔊 Listen</strong> to hear the whole question and options.</p>
+        <p><b>2</b> Look carefully at the picture.</p>
         <p><b>3</b> Choose A, B or C.</p>
         <p><b>4</b> Press <strong>✓ Check answer</strong>.</p>
-        <p><b>5</b> Correct answers earn a ⭐.</p>
+        <p><b>5</b> If you are wrong, try again. If you are right, continue.</p>
       </div>
-      <div class="row"><button id="testAudio" class="blue">🔊 Test audio</button><button id="ready" class="green">Let's go! ➜</button></div>
+      <div class="row">
+        <button id="testAudio" class="blue">🔊 Test audio</button>
+        <button id="ready" class="green">See topics ➜</button>
+      </div>
       <p id="audioMsg" class="msg"></p>
     </div>
   </section>
 
-  <section id="section" class="screen"><div class="card sectionCard"><div id="sectionInfo"></div><button id="begin" class="green">Start section ➜</button></div></section>
+  <section id="topics" class="screen">
+    <div class="card">
+      <h1>📚 What will we practice?</h1>
+      <div id="topicGrid" class="topicGrid"></div>
+      <div class="row"><button id="startTopics" class="green">Start Section 1 ➜</button></div>
+    </div>
+  </section>
+
+  <section id="section" class="screen">
+    <div class="card sectionCard">
+      <div id="sectionInfo"></div>
+      <button id="begin" class="green">Start section ➜</button>
+    </div>
+  </section>
 
   <section id="quiz" class="screen">
     <div class="card">
@@ -48,14 +68,25 @@
       <div id="picture" class="picture"></div>
       <div id="answers" class="answers"></div>
       <div id="feedback" class="feedback" aria-live="polite"></div>
-      <div class="row"><button id="check" class="green" disabled>✓ Check answer</button><button id="next" class="green hide">Next ➜</button></div>
+      <div class="row">
+        <button id="check" class="green" disabled>✓ Check answer</button>
+        <button id="next" class="green hide">Next ➜</button>
+      </div>
     </div>
   </section>
 
-  <section id="result" class="screen"><div class="card result">
-    <div class="trophy">🏆</div><h1>Amazing work!</h1><h2 id="who"></h2><div id="score" class="score"></div><div id="stars" class="stars"></div><p id="finalMsg"></p>
-    <button id="again" class="green">↻ Play again</button>
-  </div></section>
+  <section id="result" class="screen">
+    <div class="card result">
+      <div class="trophy">🏆</div>
+      <h1>Amazing work!</h1>
+      <h2 id="who"></h2>
+      <div id="score" class="score"></div>
+      <div id="stars" class="stars"></div>
+      <p id="finalMsg"></p>
+      <button id="again" class="green">↻ Play again</button>
+    </div>
+  </section>
 </main>
 <script src="app.js"></script>
-</body></html>
+</body>
+</html>
