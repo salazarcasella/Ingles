@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Exam - 2nd Grade | My House & Prepositions</title>
+<style>
+  :root{
+    --bg:#fffaf2;
+    --card:#ffffff;
+    --ink:#203040;
+    --green:#2e8b57;
+    --yellow:#ffd85a;
+    --orange:#ff9f43;
+    --blue:#4c8bf5;
+    --red:#e74c3c;
+    --ok:#168a46;
+    --bad:#c0392b;
+    --muted:#6b7280;
+    --line:#d9dee7;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    background:linear-gradient(180deg,#fff8df 0,#fff 280px);
+    color:var(--ink);
+  }
+  header{
+    background:linear-gradient(135deg,#ffd85a,#ffad5a);
+    padding:28px 16px 24px;
+    text-align:center;
+    border-bottom:5px solid #fff;
+  }
+  header h1{margin:0 0 6px;font-size:clamp(28px,5vw,44px)}
+  header p{margin:0;font-size:18px}
+  .wrap{max-width:980px;margin:0 auto;padding:20px}
+  .intro,.section,.result{
+    background:var(--card);
+    border:2px solid #f0e4c7;
+    border-radius:20px;
+    padding:20px;
+    margin:18px 0;
+    box-shadow:0 8px 24px rgba(0,0,0,.06);
+  }
+  .intro h2,.section h2{margin-top:0}
+  .instructions{
+    display:grid;
+    gap:8px;
+    margin:12px 0 0;
+    padding-left:22px;
+  }
+  .name-row{
+    display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:14px
+  }
+  input[type="text"]{
+    border:2px solid var(--line);
+    border-radius:12px;
+    padding:10px 12px;
+    font-size:16px;
+    min-width:240px;
+  }
+  .mini-vocab{
+    display:flex;flex-wrap:wrap;gap:8px;margin-top:12px
+  }
+  .chip{
+    background:#eef6ff;border:1px solid #cfe1ff;border-radius:999px;
+    padding:7px 10px;font-size:14px
+  }
+  .question{
+    border-top:1px dashed #d9d9d9;
+    padding:18px 0 8px;
+  }
+  .question:first-of-type{border-top:none}
+  .qtitle{font-size:18px;font-weight:700;margin-bottom:10px}
+  .options{display:grid;gap:8px}
+  .option{
+    display:flex;gap:9px;align-items:center;
+    background:#f8fafc;
+    border:2px solid #e5e7eb;
+    border-radius:12px;
+    padding:10px 12px;
+    cursor:pointer;
+  }
+  .option:hover{border-color:#aac7ff;background:#f2f7ff}
+  .listen-btn,.check-btn,.finish-btn,.reset-btn{
+    border:0;border-radius:12px;padding:10px 14px;
+    font-weight:700;font-size:15px;cursor:pointer;margin-top:10px
+  }
+  .listen-btn{background:#7c3aed;color:white;margin-right:8px}
+  .listen-btn:hover{filter:brightness(.96)}
+  .check-btn{background:var(--blue);color:white}
+  .finish-btn{background:var(--green);color:white;font-size:18px;padding:13px 20px}
+  .reset-btn{background:#e9edf3;color:#25364a;margin-left:8px}
+  .feedback{font-weight:700;margin-top:8px;min-height:24px}
+  .feedback.ok{color:var(--ok)}
+  .feedback.bad{color:var(--bad)}
+  .scene{
+    margin:10px 0 14px;
+    display:flex;
+    justify-content:center;
+  }
+  .scene svg{
+    width:min(100%,560px);
+    height:auto;
+    border-radius:18px;
+    background:#f7fbff;
+    border:2px solid #dbeafe;
+  }
+  .grid-cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:12px;margin:12px 0
+  }
+  .room-card{
+    border:2px solid #e8e8e8;border-radius:16px;padding:14px;text-align:center;
+    background:#fff;
+  }
+  .room-card .emoji{font-size:52px;display:block;margin-bottom:8px}
+  .sentence-box{
+    background:#fff7df;
+    border-left:6px solid var(--yellow);
+    padding:12px 14px;
+    border-radius:10px;
+    font-size:18px;
+  }
+  .score-big{
+    font-size:34px;font-weight:800;color:var(--green)
+  }
+  .hidden{display:none}
+  .small{font-size:14px;color:var(--muted)}
+  footer{text-align:center;color:#6b7280;padding:25px 12px 40px}
+  .progress{
+    position:sticky;top:0;z-index:9;
+    background:rgba(255,255,255,.96);
+    border-bottom:1px solid #e5e7eb;
+    padding:8px 12px;
+    text-align:center;
+    font-weight:700;
+  }
+  @media print{
+    .check-btn,.finish-btn,.reset-btn,.progress{display:none}
+    body{background:white}
+    .intro,.section,.result{box-shadow:none}
+  }
+</style>
+</head>
+<body>
+<div class="progress" id="progress">Answered: 0 / 20</div>
+
+<header>
+  <h1>🏠 English Exam — 2nd Grade</h1>
+  <p>My House • Prepositions of Place • Clothes & Colors</p>
+</header>
+
+<main class="wrap">
+  <section class="intro">
+    <h2>👋 Instructions / Instrucciones</h2>
+    <ol class="instructions">
+      <li>Lee cada pregunta con calma.</li>
+      <li>Marca <b>solo una respuesta</b> en cada pregunta.</li>
+      <li>Presiona <b>“Check answer”</b> para saber si está bien o mal.</li>
+      <li>Si te equivocas, puedes volver a intentarlo.</li>
+      <li>Al terminar, presiona <b>“Finish exam”</b> para ver tu puntaje.</li>
+    </ol>
+    <div class="name-row">
+      <label for="studentName"><b>Student name:</b></label>
+      <input id="studentName" type="text" placeholder="Escribe tu nombre">
+    </div>
+    <div class="sentence-box" style="margin-top:14px">
+      🔊 <b>Audio:</b> Presiona <b>“Listen”</b> para escuchar cada pregunta en inglés.
+      <button type="button" class="listen-btn" style="margin-left:8px" data-speak="Hello! Welcome to your English exam. Listen carefully and choose the correct answer.">🔊 Test audio</button>
+    </div>
+    <div class="mini-vocab">
+      <span class="chip">in = dentro de / en</span>
+      <span class="chip">on = encima de / sobre</span>
+      <span class="chip">under = debajo de</span>
+      <span class="chip">Where’s...? = ¿Dónde está...?</span>
+      <span class="chip">Where are...? = ¿Dónde están...?</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Part 1 — My House 🏠</h2>
+    <p class="small">Choose the correct room.</p>
+
+    <div class="grid-cards">
+      <div class="room-card"><span class="emoji">🛏️</span><b>bedroom</b></div>
+      <div class="room-card"><span class="emoji">🍳</span><b>kitchen</b></div>
+      <div class="room-card"><span class="emoji">🛁</span><b>bathroom</b></div>
+      <div class="room-card"><span class="emoji">🛋️</span><b>living room</b></div>
+    </div>
+
+    <div class="question" data-answer="bedroom">
+      <div class="qtitle">1. Where do you sleep?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q1" value="kitchen"> kitchen</label>
+        <label class="option"><input type="radio" name="q1" value="bedroom"> bedroom</label>
+        <label class="option"><input type="radio" name="q1" value="bathroom"> bathroom</label>
+      </div>
+      <button type="button" class="listen-btn" data-speak="Where do you sleep?">🔊 Listen</button><button class="check-btn">Check answer</button><div class="feedback"></div>
+    </div>
+
+    <div class="question" data-answer="kitchen">
+      <div class="qtitle">2. Where do we cook food?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q2" value="living room"> living room</label>
+        <label class="option"><input type="radio" name="q2" value="kitchen"> kitchen</label>
+        <label class="option"><input type="radio" name="q2" value="bedroom"> bedroom</label>
+      </div>
+      <button type="button" class="listen-btn" data-speak="Where do we cook food?">🔊 Listen</button><button class="check-btn">Check answer</button><div class="feedback"></div>
+    </div>
+
+    <div class="question" data-answer="bathroom">
+      <div class="qtitle">3. Where is the bathtub?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q3" value="bathroom"> bathroom</label>
+        <label class="option"><input type="radio" name="q3" value="kitchen"> kitchen</label>
+        <label class="option"><input type="radio" name="q3" value="living room"> living room</label>
+      </div>
+      <button type="button" class="listen-btn" data-speak="Where is the bathtub?">🔊 Listen</button><button class="check-btn">Check answer</button><div class="feedback"></div>
+    </div>
+
+    <div class="question" data-answer="living room">
+      <div class="qtitle">4. Where is the sofa?</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q4" value="living room"> living room</label>
+        <label class="option"><input type="radio" name="q4" value="bathroom"> bathroom</label>
+        <label class="option"><input type="radio" name="q4" value="bedroom"> bedroom</label>
+      </div>
+      <button type="button" class="listen-btn" data-speak="Where is the sofa?">🔊 Listen</button><button class="check-btn">Check answer</button><div class="feedback"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Part 2 — Prepositions of Place 🏍</h2>
+    <p class="small">Look at the picture and choose: <b>in, on, under</b>.</p>
+
+    <div class="scene" aria-label="Ball on table, cat under chair, teddy bear in box">
+      <svg viewBox="0 0 700 320" role="img">
+        <rect x="0" y="0" width="700" height="320" fill="#fff8e8"/>
+        <rect x="120" y="100" width="170" height="22" rx="4" fill="#c6874a"/>
+        <rect x="135" y="122" width="16" height="120" fill="#8b5a2b"/>
+        <rect x="260" y="122" width="16" height="120" fill="#8b5a2b"/>
+        <circle cx="210" cy="76" r="34" fill="#f4f4f4" stroke="#333" stroke-width="3"/>
+        <path d="M190 58 l14 4 6-13 8 14 15-4-4 14 12 8-14 5-1 15-13-8-13 8 0-15-14-5 12-8z" fill="#222"/>
+        <text x="154" y="280" font-size="22" font-weight="700">TABLE</text>
+
+        <rect x="430" y="85" width="130" height="18" rx="4" fill="#8ab17d"/>
+        <rect x="445" y="103" width="14" height="120" fill="#648a5c"/>
+        <rect x="530" y="103" width="14" height="120" fill="#648a5c"/>
+        <circle cx="492" cy="190" r="34" fill="#d6d3d1"/>
+        <polygon points="465,164 476,145 485,168" fill="#d6d3d1"/>
+        <polygon points="500,168 512,145 519,171" fill="#d6d3d1"/>
+        <circle cx="482" cy="188" r="4" fill="#222"/><circle cx="503" cy="188" r="4" fill="#222"/>
+        <path d="M486 202 q6 7 12 0" stroke="#222" stroke-width="3" fill="none"/>
+        <text x="445" y="280" font-size="22" font-weight="700">CHAIR</text>
+
+        <rect x="300" y="215" width="110" height="65" fill="#d49a55" stroke="#8b5a2b" stroke-width="3"/>
+        <path d="M300 215 l30 25 25-25 25 25 30-25" fill="#eab676" stroke="#8b5a2b" stroke-width="3"/>
+        <circle cx="355" cy="242" r="23" fill="#b97a57"/>
+        <circle cx="342" cy="226" r="8" fill="#b97a57"/><circle cx="368" cy="226" r="8" fill="#b97a57"/>
+        <circle cx="348" cy="240" r="2.8" fill="#222"/><circle cx="362" cy="240" r="2.8" fill="#222"/>
+        <text x="321" y="307" font-size="22" font-weight="700">BOX</text>
+      </svg>
+    </div>
+
+    <div class="question" data-answer="on">
+      <div class="qtitle">5. The ball is ___ the table.</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q5" value="in"> in</label>
+        <label class="option"><input type="radio" name="q5" value="on"> on</label>
+        <label class="option"><input type="radio" name="q5" value="under"> under</label>
+      </div>
+      <button type="button" class="listen-btn" data-speak="The ball is ___ the table.">🔊 Listen</button><button class="check-btn">Check answer</button><div class="feedback"></div>
+    </div>
+
+    <div class="question" data-answer="under">
+      <div class="qtitle">6. The cat is ___ the chair.</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q6" value="under"> under</label>
+        <label class="option"><input type="radio" name="q6" value="on"> on</label>
+        <label class="option"><input type="radio" name="q6" value="in"> in</label>
+      </div>
+      <button type="button" class="listen-btn" data-speak="The cat is ___ the chair.">🔊 Listen</button><button class="check-btn">Check answer</button><div class="feedback"></div>
+    </div>
+
+    <div class="question" data-answer="in">
+      <div class="qtitle">7. The teddy bear is ___ the box.</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q7" value="on"> on</label>
+        <label class="option"><input type="radio" name="q7" value="under"> under</label>
+        <label class="option"><input type="radio" name="q7" value="in"> in</label>
+      </div>
+      <button type="button" class="listen-btn" data-speak="The teddy bear is ___ the box.">🔊 Listen</button><button class="check-btn">Check answer</button><div class="feedback"></div>
+    </div>
+
+    <div class="question" data-answer="under">
+      <div class="qtitle">8. “Debajo de la cama” in English is:</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q8" value="under"> under the bed</label>
+        <label class="option"><input type="radio" name="q8" value="on"> on the bed</label>
+        <label class="option"><input type="radio" name="q8" value="in"> in the bed</label>
+      </div>
+      <button type="button" class="listen-btn" data-speak="&amp;ldquo;Debajo de la cama&amp;rdquo;l English is:">🔊 Listen</button><button class="check-btn">Check answer</button><div class="feedback"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Part 3 — Where is...? / Where are...? 🔎</h2>
+
+    <div class="sentence-box">Remember: <b>Where’s</b> = Where is &nbsp; |&nbsp; <b>Where are</b> = óDOnde están...</div>
+
+    <div class="question" data-answer="It's on the bed.">
+      <div class="qtitle">9. Where’s the ball? ⚽ (The ball is on the bed.)</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q9" value="It's on the bed."> It’s on the bed.</label>
+        <label class="option"><input type="radio" name="q9" value="They're on the bed."> They’re on the bed.</label>
+        <label class="option"><input type="radio" name="q9" value="It's under the bed."> It’s under the bed.</label>
+      </div>
+      <button type="button" class="listen-btn" data-speak="Where's the ball? ⚡ (The ball is on the bed.)">🔊 Listen</button><button class="check-btn">Check answer</button><div class="feedback"></div>
+    </div>
+
+    <div class="question" data-answer="They're under the bed.">
+      <div class="qtitle">10. Where are the shoes? 👟0��� (They are under the bed.)</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q10" value="It's under the bed."> It’s under the bed.</label>
+        <label class="option"><input type="radio" name="q10" value="They're under the bed."> They’re under the bed.</label>
+        <label class="option"><input type="radio" name="q10" value="They're in the bag."> They’re in the bag.</label>
+      </div>
+      <button type="button" class="listen-btn" data-speak="Where are the shoes? 👟0��� (They are under the bed.)">🔊 Listen</button><button class="check-btn">Check answer</button><div class="feedback"></div>
+    </div>
+
+    <div class="question" data-answer="Where's the computer?">
+      <div class="qtitle">11. Choose the correct question for one computer. 💻</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q11" value="Where's the computer?"> Where’s the computer?</label>
+        <label class="option"><input type="radio" name="q11" value="Where are the computer?"> Where are the computer?</label>
+        <label class="option"><input type="radio" name="q11" value="Where the computer?"> Where the computer?</label>
+      </div>
+      <button type="button" class="listen-btn" data-speak="Choose the correct question for one computer.">🔊 Listen</button><button class="check-btn">Check answer</button><div class="feedback"></div>
+    </div>
+
+    <div class="question" data-answer="Where are my pants?">
+      <div class="qtitle">12. Choose the correct question. 👋</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q12" value="Where's my pants?"> Where’s my pants?</label>
+        <label class="option"><input type="radio" name="q12" value="Where are my pants?"> Where are my pants?</label>
+        <label class="option"><input type="radio" name="q12" value="Where is my pants?"> Where is my pants?</label>
+      </div>
+      <button type="button" class="listen-btn" data-speak="Choose the correct question.">🔊 Listen</button><button class="check-btn">Check answer</button><div class="feedback"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Part 4 — Clothes & Colors 👕”💗</h2>
+
+    <div class="question" data-answer="His pants are green.">
+      <div class="qtitle">13. A boy is wearing green pants. Choose the correct sentence.</div>
+      <div class="options">
+        <label class="option"><input type="radio" name="q13" value="His pants are green."> His pants are green.</label>
+        <label class="option"><input type="radio" name="q13" value="Her pants are green."> Her pants are green.</label>
+        <label class="option"><input type="radio" name="q13" value="His pants is green."> His pants is green.</label>
+      </div>
+      <button type="button" class="listen-btn" data-speak="A boy is wearing green pants. Choose the correct sentence.">🔊 Listen</button><button class="check-btn">Check answer</button><div class="feedback"></div>
+    </div>
+
+    <div class="question" data-answer="Her dress is yellow.">
+      <div class="qtitle">14. A girl jZ-��ޢh���az����b����+^~�ۭ��
