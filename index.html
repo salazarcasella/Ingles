@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>My English Adventure - 2nd Grade</title>
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=6">
 </head>
 <body>
 <main id="app">
@@ -18,11 +18,11 @@
 
   <section id="start" class="screen active">
     <div class="card hero">
-      <div class="heroPic">🏡<span>👦🏻</span><span>👧🏻</span><span>🐶</span></div>
+      <div class="heroStrip">🏡 <span>👦🏻</span> <span>👧🏻</span> <span>🐶</span></div>
       <h1>English <em>Adventure!</em></h1>
       <h2>2nd Grade</h2>
       <p>Listen • Look • Choose • Learn ⭐</p>
-      <input id="name" placeholder="Your name / Tu nombre">
+      <input id="name" autocomplete="off" placeholder="Your name / Tu nombre">
       <button id="go" class="green">▶ START TEST</button>
     </div>
   </section>
@@ -31,9 +31,9 @@
     <div class="card">
       <h1>🎧 How to play</h1>
       <div class="steps">
-        <p><b>1</b> Press <strong>🔊 Listen</strong> to hear the whole question and options.</p>
+        <p><b>1</b> Press <strong>🔊 Listen</strong> to hear the full question and all 3 options.</p>
         <p><b>2</b> Look carefully at the picture.</p>
-        <p><b>3</b> Choose A, B or C.</p>
+        <p><b>3</b> Choose only one answer: A, B or C.</p>
         <p><b>4</b> Press <strong>✓ Check answer</strong>.</p>
         <p><b>5</b> If you are wrong, try again. If you are right, continue.</p>
       </div>
@@ -41,7 +41,7 @@
         <button id="testAudio" class="blue">🔊 Test audio</button>
         <button id="ready" class="green">See topics ➜</button>
       </div>
-      <p id="audioMsg" class="msg"></p>
+      <p id="audioMsg" class="msg" aria-live="polite"></p>
     </div>
   </section>
 
@@ -68,9 +68,9 @@
       <div id="picture" class="picture"></div>
       <div id="answers" class="answers"></div>
       <div id="feedback" class="feedback" aria-live="polite"></div>
-      <div class="row">
+      <div class="row actionRow">
         <button id="check" class="green" disabled>✓ Check answer</button>
-        <button id="next" class="green hide">Next ➜</button>
+        <button id="next" class="green hide">Next question ➜</button>
       </div>
     </div>
   </section>
@@ -87,6 +87,6 @@
     </div>
   </section>
 </main>
-<script src="app.js"></script>
+<script src="app.js?v=6"></script>
 </body>
 </html>
