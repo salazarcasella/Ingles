@@ -37,10 +37,10 @@ const Q=[
 let i=0,selected=null,locked=false,firstAttempt=true,firstTryScore=0,xp=0,currentAudio=null;
 const firstTryFlags=Array(Q.length).fill(null);
 const completedSections=new Set();
-const VERSION='9.1';
+const VERSION='9.2';
 
 function show(id){stopAudio();screens.forEach(s=>s.classList.toggle('active',s.id===id));window.scrollTo({top:0,behavior:'smooth'});}
-function imagePath(index=i){return `assets/v9/images/q${String(index+1).padStart(2,'0')}.webp?v=${VERSION}`;}
+function imagePath(index=i){const n=String(index+1).padStart(2,'0');const ext=(index>=12&&index<=17)?'jpg':'webp';return `assets/v9/images/q${n}.${ext}?v=${VERSION}`;}
 function audioPath(index=i){return `assets/v8/audio/q${String(index+1).padStart(2,'0')}.mp3?v=${VERSION}`;}
 function stopAudio(){if(currentAudio){try{currentAudio.pause();currentAudio.currentTime=0;}catch(_){}currentAudio=null;}}
 async function playFile(src,rate=1,statusEl=$('#audioStatus')){
@@ -61,7 +61,7 @@ function rail(){
   $('#railLevels').innerHTML=sections.map((s,n)=>{
     const current=i<20?Q[i][0]:5;
     const done=completedSections.has(n);
-    const locked=n>current && !done;
+    const locked=n>current&&!done;
     return `<div class="railLevel ${n===current?'active':''} ${done?'done':''} ${locked?'locked':''}"><span class="li">${done?'✅':s.icon}</span><div><b>${n+1}. ${s.name}</b><small>${done?'Completed':n===current?'Current mission':'Locked'}</small></div></div>`;
   }).join('');
 }
