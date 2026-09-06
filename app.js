@@ -37,10 +37,10 @@ const Q=[
 let i=0,selected=null,locked=false,firstAttempt=true,firstTryScore=0,xp=0,currentAudio=null;
 const firstTryFlags=Array(Q.length).fill(null);
 const completedSections=new Set();
-const VERSION='8.0';
+const VERSION='9.0';
 
 function show(id){stopAudio();screens.forEach(s=>s.classList.toggle('active',s.id===id));window.scrollTo({top:0,behavior:'smooth'});}
-function imagePath(index=i){return `assets/v7/q${String(index+1).padStart(2,'0')}.jpg?v=${VERSION}`;}
+function spritePosition(index=i){const col=index%4,row=Math.floor(index/4);return `${col*(100/3)}% ${row*25}%`;}
 function audioPath(index=i){return `assets/v8/audio/q${String(index+1).padStart(2,'0')}.mp3?v=${VERSION}`;}
 function stopAudio(){if(currentAudio){try{currentAudio.pause();currentAudio.currentTime=0;}catch(_){}currentAudio=null;}}
 async function playFile(src,rate=1,statusEl=$('#audioStatus')){
@@ -93,7 +93,6 @@ function decorFor(index,text){
 }
 function preloadNext(){
   if(i+1>=Q.length)return;
-  const img=new Image();img.src=imagePath(i+1);
   const aud=new Audio();aud.preload='metadata';aud.src=audioPath(i+1);
 }
 function render(){
@@ -102,7 +101,7 @@ function render(){
   $('#qnum').textContent=`Question ${(i%4)+1} of 4`;
   $('#question').textContent=q[1];
   $('#audioStatus').textContent='';
-  $('#picture').innerHTML=`<img class="questionImage" src="${imagePath()}" alt="Picture for question ${i+1}" loading="eager">`;
+  $('#picture').innerHTML=`<div class="questionSprite" role="img" aria-label="Picture for question ${i+1}" style="background-position:${spritePosition()}"></div>`;
   $('#feedback').className='feedback';$('#feedback').textContent='';
   $('#check').disabled=true;$('#check').classList.remove('hide');$('#next').classList.add('hide');
   $('#encourage').textContent=s===0?'Which room matches the picture?':s===1?'Where is the object?':s===2?'Singular or plural?':s===3?'Look at the clothes and color.':'Use everything you learned!';
@@ -189,6 +188,6 @@ $('#slow').addEventListener('click',()=>playQuestion(.84));
 $('#check').addEventListener('click',check);
 $('#next').addEventListener('click',next);
 $('#again').addEventListener('click',reset);
-window.__EXAM_TEST__={Q,sections,imagePath,audioPath,render,check,next,getState:()=>({i,firstTryScore,xp,firstAttempt,firstTryFlags:[...firstTryFlags]})};
+window.__EXAM_TEST__={Q,sections,spritePosition,audioPath,render,check,next,getState:()=>({i,firstTryScore,xp,firstAttempt,firstTryFlags:[...firstTryFlags]})};
 hud();rail();
 })();
